@@ -1,11 +1,15 @@
 package ru.gb.j2ee.servlet;
 
+import ru.gb.j2ee.model.Product;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nikita Ermakov
@@ -14,17 +18,14 @@ import java.io.PrintWriter;
 public class CatalogServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        try (PrintWriter writer = resp.getWriter()) {
-            writer.println("<h2>Catalog</h2>");
-            writer.println("<ul>");
-            writer.println("<li><a href=\"/lesson2/main\">main page</a></li>");
-            writer.println("<li><a href=\"/lesson2/product\">products</a></li>");
-            writer.println("<li><a href=\"/lesson2/cart\">product cart</a></li>");
-            writer.println("<li><a href=\"/lesson2/order\">order</a></li>");
-            writer.println("</ul>");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final List<Product> products = new ArrayList<>();
+
+        products.add(new Product("Leg", 500, "Human's leg"));
+        products.add(new Product("Hand", 375, "Human's hand"));
+        products.add(new Product("Head", 2000, "Separated human's head"));
+
+        req.setAttribute("products", products);
+        req.getRequestDispatcher("/WEB-INF/views/catalog.jsp").forward(req, resp);
     }
 }
