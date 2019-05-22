@@ -4,7 +4,6 @@
 <ul>
     <li><a href="${path}/main">main page</a></li>
     <li><a href="${path}/catalog">catalog</a></li>
-    <li><a href="${path}/product">products</a></li>
     <li><a href="${path}/cart">product cart</a></li>
     <li><a href="${path}/order">order</a></li>
 </ul>

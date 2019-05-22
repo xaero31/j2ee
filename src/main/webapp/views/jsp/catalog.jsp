@@ -26,6 +26,12 @@
             <td>${product.name}</td>
             <td>${product.price}</td>
             <td>${product.description}</td>
+            <td>
+                <form method="post" action="${pageContext.request.contextPath}/catalog/buy">
+                    <input type="hidden" name="productId" value="${product.id}"/>
+                    <input type="submit" value="Buy"/>
+                </form>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

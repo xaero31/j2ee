@@ -1,40 +1,42 @@
-package ru.gb.j2ee.servlet.page;
+package ru.gb.j2ee.servlet.action;
 
 import lombok.Setter;
 import ru.gb.j2ee.model.Order;
 import ru.gb.j2ee.repository.OrderRepository;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author Nikita Ermakov
  *
- * Servlet for order.jsp page
+ * Servlet for approving user's order
  */
-@WebServlet(name = "order", urlPatterns = "/order")
-public class OrderServlet extends HttpServlet {
+@WebServlet(name = "submitOrder", urlPatterns = "/cart/submit")
+public class SubmitOrderServlet extends HttpServlet {
 
-    private static final String ORDER_JSP = "/views/jsp/order.jsp";
+    private static final String ORDER = "order";
 
     @Setter
     @Inject
     private OrderRepository orderRepository;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         final HttpSession session = req.getSession(false);
+        final Order order = (Order) session.getAttribute(ORDER);
         final String user = (String) session.getAttribute("user");
-        final List<Order> orders = orderRepository.getUserOrders(user);
 
-        req.setAttribute("orders", orders);
-        req.getRequestDispatcher(ORDER_JSP).forward(req, resp);
+        if (order != null) {
+            orderRepository.addOrder(user, order);
+            session.removeAttribute(ORDER);
+        }
+
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }
