@@ -9,16 +9,39 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for login form
  */
 @WebServlet(name = "login", urlPatterns = "/login_process")
 public class LoginServlet extends HttpServlet {
+    
+    private static final String LOGIN = "login";
+
+    private static final String PASSWORD = "password";
+
+    private static final String ADMIN = "admin";
+
+    private static final String USER = "user";
+
+    private static final String MAIN = "/main";
+
+    private static final String WRONG_PASSWORD = "WrongPass";
+
+    private static final String ADMIN_PASSWORD = "admin_password";
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String login = req.getParameter("login");
-        final String password = req.getParameter("password");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        final String login = req.getParameter(LOGIN);
+        final String password = req.getParameter(PASSWORD);
 
-        req.getSession().setAttribute("user", login);
+        if (login.equals(ADMIN)) {
+            if (!password.equals(ADMIN_PASSWORD)) {
+                req.setAttribute(WRONG_PASSWORD, true);
+                req.getRequestDispatcher(req.getContextPath() + MAIN).forward(req, resp);
+            }
+        } else {
+            req.getSession().setAttribute(USER, login);
+        }
 
         resp.sendRedirect(req.getContextPath());
     }

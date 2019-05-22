@@ -9,13 +9,27 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Filter for secured servlets which requires to be logged in
  */
 @WebFilter(filterName = "security", urlPatterns = {"/security/*", "/cart"})
 public class SecurityFilter implements Filter {
 
-    @Override
-    public void init(FilterConfig filterConfig) {
-    }
+    private static final String USER = "user";
+
+    private static final String FAILED_ATTRIBUTE = "failed";
+
+    private static final String MAIN = "/main";
+
+    private static final String CACHE_TITLE = "Cache-Control";
+
+    private static final String CACHE_PARAMS = "private, no-store, no-cache, must-revalidate";
+
+    private static final String LOGOUT_POSTFIX = "/security/logout\">Logout</a></p>";
+
+    private static final String LOGOUT_MID_PART = " is logged in. <a href=\"";
+
+    private static final String LOGOUT_PREFIX = "<p>User ";
 
     @Override
     public void doFilter(ServletRequest servletRequest,
@@ -25,21 +39,17 @@ public class SecurityFilter implements Filter {
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         final HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("user") == null) {
-            request.setAttribute("failed", true);
-            request.getRequestDispatcher(request.getContextPath() + "/main").forward(request, response);
+        if (session == null || session.getAttribute(USER) == null) {
+            request.setAttribute(FAILED_ATTRIBUTE, true);
+            request.getRequestDispatcher(request.getContextPath() + MAIN).forward(request, response);
         } else {
-            final String user = (String) session.getAttribute("user");
+            final String user = (String) session.getAttribute(USER);
 
-            response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
-            response.getWriter().println("<p>User " + user + " is logged in. <a href=\"" + request.getContextPath()
-                    + "/security/logout\">Logout</a></p>");
+            response.setHeader(CACHE_TITLE, CACHE_PARAMS);
+            response.getWriter().println(LOGOUT_PREFIX + user + LOGOUT_MID_PART
+                    + request.getContextPath() + LOGOUT_POSTFIX);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
     }
 }

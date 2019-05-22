@@ -1,4 +1,4 @@
-package ru.gb.j2ee.servlet;
+package ru.gb.j2ee.servlet.page;
 
 import ru.gb.j2ee.model.Product;
 
@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for catalog.jsp page
  */
 @WebServlet(name = "catalog", urlPatterns = "/catalog")
 public class CatalogServlet extends HttpServlet {
@@ -26,6 +28,6 @@ public class CatalogServlet extends HttpServlet {
         products.add(new Product("Head", 2000, "Separated human's head"));
 
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/catalog.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/jsp/catalog.jsp").forward(req, resp);
     }
 }

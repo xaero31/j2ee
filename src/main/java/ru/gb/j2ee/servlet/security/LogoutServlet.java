@@ -1,6 +1,5 @@
 package ru.gb.j2ee.servlet.security;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +9,14 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for logout action
  */
 @WebServlet(name = "logout", urlPatterns = "/security/logout")
 public class LogoutServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         final HttpSession session = req.getSession(false);
 
         if (session != null) {

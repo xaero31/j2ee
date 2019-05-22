@@ -10,7 +10,7 @@
 
     <servlet>
         <servlet-name>NotFound</servlet-name>
-        <servlet-class>ru.gb.j2ee.servlet.error.NotFoundServlet</servlet-class>
+        <servlet-class>ru.gb.j2ee.servlet.page.error.NotFoundServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NotFound</servlet-name>
@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>Forbidden</servlet-name>
-        <servlet-class>ru.gb.j2ee.servlet.error.ForbiddenServlet</servlet-class>
+        <servlet-class>ru.gb.j2ee.servlet.page.error.ForbiddenServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Forbidden</servlet-name>

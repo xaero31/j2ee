@@ -20,8 +20,11 @@
 <c:if test="${failed == true}">
     <p>Please login</p>
 </c:if>
+<c:if test="${WrongPass == true}">
+    <p>Entered password is wrong</p>
+</c:if>
 
-<jsp:include page="template/menu.jsp"/>
+<jsp:include page="../template/menu.jsp"/>
 
 </body>
 </html>

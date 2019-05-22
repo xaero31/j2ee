@@ -7,7 +7,7 @@
 
 <h2>Product cart</h2>
 
-<jsp:include page="template/menu.jsp"/>
+<jsp:include page="../template/menu.jsp"/>
 
 </body>
 </html>

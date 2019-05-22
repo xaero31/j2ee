@@ -9,7 +9,7 @@
 
 <h2>Catalog</h2>
 
-<jsp:include page="template/menu.jsp"/>
+<jsp:include page="../template/menu.jsp"/>
 
 
 <table>

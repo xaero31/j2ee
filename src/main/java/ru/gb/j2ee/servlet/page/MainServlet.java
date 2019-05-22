@@ -1,4 +1,4 @@
-package ru.gb.j2ee.servlet;
+package ru.gb.j2ee.servlet.page;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +9,14 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for main.jsp page
  */
-@WebServlet(name = "cart", urlPatterns = "/cart")
-public class CartServlet extends HttpServlet {
+@WebServlet(name = "main", urlPatterns = "/main")
+public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/cart.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/jsp/main.jsp").forward(req, resp);
     }
 }

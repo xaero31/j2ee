@@ -1,4 +1,4 @@
-package ru.gb.j2ee.servlet;
+package ru.gb.j2ee.servlet.page;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +9,14 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for product.jsp page
  */
-@WebServlet(name = "order", urlPatterns = "/order")
-public class OrderServlet extends HttpServlet {
+@WebServlet(name = "product", urlPatterns = "/product")
+public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/order.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/jsp/product.jsp").forward(req, resp);
     }
 }
