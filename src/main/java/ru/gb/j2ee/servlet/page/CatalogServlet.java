@@ -1,15 +1,15 @@
 package ru.gb.j2ee.servlet.page;
 
-import ru.gb.j2ee.model.Product;
+import lombok.Setter;
+import ru.gb.j2ee.repository.ProductRepository;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Nikita Ermakov
@@ -19,15 +19,17 @@ import java.util.List;
 @WebServlet(name = "catalog", urlPatterns = "/catalog")
 public class CatalogServlet extends HttpServlet {
 
+    private static final String PRODUCTS_ATTRIBUTE = "products";
+
+    private static final String CATALOG_JSP = "/views/jsp/catalog.jsp";
+
+    @Setter
+    @Inject
+    private ProductRepository productRepository;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final List<Product> products = new ArrayList<>();
-
-        products.add(new Product("Leg", 500, "Human's leg"));
-        products.add(new Product("Hand", 375, "Human's hand"));
-        products.add(new Product("Head", 2000, "Separated human's head"));
-
-        req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/jsp/catalog.jsp").forward(req, resp);
+        req.setAttribute(PRODUCTS_ATTRIBUTE, productRepository.getProducts());
+        req.getRequestDispatcher(CATALOG_JSP).forward(req, resp);
     }
 }

@@ -15,8 +15,10 @@ import java.io.IOException;
 @WebServlet(name = "order", urlPatterns = "/order")
 public class OrderServlet extends HttpServlet {
 
+    private static final String ORDER_JSP = "/views/jsp/order.jsp";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/jsp/order.jsp").forward(req, resp);
+        req.getRequestDispatcher(ORDER_JSP).forward(req, resp);
     }
 }

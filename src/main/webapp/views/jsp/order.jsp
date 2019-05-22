@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<jsp:include page="../template/menu.jsp"/>
+<jsp:include page="template/menu.jsp"/>
 
 </body>
 </html>

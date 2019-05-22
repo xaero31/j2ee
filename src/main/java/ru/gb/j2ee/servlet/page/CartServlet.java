@@ -15,8 +15,10 @@ import java.io.IOException;
 @WebServlet(name = "cart", urlPatterns = "/cart")
 public class CartServlet extends HttpServlet {
 
+    private static final String CART_JSP = "/views/jsp/cart.jsp";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/jsp/cart.jsp").include(req, resp);
+        req.getRequestDispatcher(CART_JSP).include(req, resp);
     }
 }

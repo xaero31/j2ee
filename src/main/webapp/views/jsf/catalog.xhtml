@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Admin Catalog Panel</title>
+</h:head>
+
+<h:body>
+    <h2>Admin Catalog Panel</h2>
+
+    <ui:include src="template/menu.xhtml"/>
+
+    <h:form id="productsForm">
+        <h:dataTable value="#{productRepository.products}" var="product">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{product.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                #{product.price}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                #{product.description}
+            </h:column>
+
+            <h:column>
+                <h:commandButton value="edit" action="#{editBean.editProduct(product.id)}"/>
+                <h:commandButton value="remove" action="#{productRepository.products.remove(product)}">
+                    <f:ajax render="productsForm"/>
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

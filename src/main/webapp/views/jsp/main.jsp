@@ -24,7 +24,7 @@
     <p>Entered password is wrong</p>
 </c:if>
 
-<jsp:include page="../template/menu.jsp"/>
+<jsp:include page="template/menu.jsp"/>
 
 </body>
 </html>
