@@ -2,6 +2,7 @@ package ru.gb.j2ee.servlet.action;
 
 import lombok.Setter;
 import ru.gb.j2ee.model.Order;
+import ru.gb.j2ee.model.meta.State;
 import ru.gb.j2ee.repository.OrderRepository;
 
 import javax.inject.Inject;
@@ -35,6 +36,7 @@ public class SubmitOrderServlet extends HttpServlet {
 
         if (order != null) {
             order.setDate(new Date());
+            order.setState(State.IN_PROGRESS);
             orderRepository.addOrder(user, order);
             session.removeAttribute(ORDER);
         }

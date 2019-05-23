@@ -19,7 +19,7 @@ public class Order {
 
     private Date date;
 
-    private State state = State.IN_PROGRESS;
+    private State state;
 
     private List<Product> products;
 
