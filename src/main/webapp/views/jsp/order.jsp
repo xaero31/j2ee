@@ -15,6 +15,7 @@
     <thead>
     <tr>
         <td>Id</td>
+        <td>Status</td>
         <td>Products</td>
     </tr>
     </thead>
@@ -22,8 +23,8 @@
     <tbody>
     <c:forEach items="${orders}" var="order">
         <tr>
-            <td rowspan="${order.products.size + 1}">${order.id}</td>
-            <td>Status: ${order.state}</td>
+            <td rowspan="${order.products.size() + 1}">${order.id}</td>
+            <td rowspan="${order.products.size() + 1}">${order.state.text}</td>
         </tr>
         <c:forEach items="${order.products}" var="product">
             <tr>
@@ -32,8 +33,8 @@
         </c:forEach>
         <tr>
             <td>
-                <form method="post" action="#">
-                    <input type="hidden" value="${order.id}"/>
+                <form method="post" action="${pageContext.request.contextPath}/order/cancel">
+                    <input type="hidden" name="orderId" value="${order.id}"/>
                     <input type="submit" value="cancel order"/>
                 </form>
             </td>

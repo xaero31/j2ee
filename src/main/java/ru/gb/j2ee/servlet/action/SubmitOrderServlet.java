@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author Nikita Ermakov
@@ -33,6 +34,7 @@ public class SubmitOrderServlet extends HttpServlet {
         final String user = (String) session.getAttribute("user");
 
         if (order != null) {
+            order.setDate(new Date());
             orderRepository.addOrder(user, order);
             session.removeAttribute(ORDER);
         }
