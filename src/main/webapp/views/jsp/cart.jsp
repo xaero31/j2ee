@@ -36,9 +36,11 @@
     </tbody>
 </table>
 
-<form method="post" action="${pageContext.request.contextPath}/cart/submit">
-    <input type="submit" value="Submit order"/>
-</form>
+<c:if test="${list != null}">
+    <form method="post" action="${pageContext.request.contextPath}/cart/submit">
+        <input type="submit" value="Submit order"/>
+    </form>
+</c:if>
 
 </body>
 </html>

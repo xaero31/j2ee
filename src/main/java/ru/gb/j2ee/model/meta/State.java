@@ -14,10 +14,10 @@ public enum State {
     CANCELED("Canceled");
 
     @Getter
-    private String text;
+    private String name;
 
-    State(String text) {
-        this.text = text;
+    State(String name) {
+        this.name = name;
     }
 
 

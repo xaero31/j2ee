@@ -2,10 +2,9 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ul>
-        <li><a href="${pageContext.request.contextPath}/main">main page</a></li>
-        <li><a href="${pageContext.request.contextPath}/catalog">catalog</a></li>
-        <li><a href="${pageContext.request.contextPath}/product">products</a></li>
-        <li><a href="${pageContext.request.contextPath}/cart">product cart</a></li>
-        <li><a href="${pageContext.request.contextPath}/order">order</a></li>
+        <li><a href="#{facesContext.externalContext.requestContextPath}/main">main page</a></li>
+        <li><a href="#{facesContext.externalContext.requestContextPath}/catalog">catalog</a></li>
+        <li><a href="#{facesContext.externalContext.requestContextPath}/cart">product cart</a></li>
+        <li><a href="#{facesContext.externalContext.requestContextPath}/order">order</a></li>
     </ul>
 </ui:composition>

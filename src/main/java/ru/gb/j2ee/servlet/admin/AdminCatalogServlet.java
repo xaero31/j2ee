@@ -15,10 +15,8 @@ import java.io.IOException;
 @WebServlet(name = "catalogAdmin", urlPatterns = "admin/catalog")
 public class AdminCatalogServlet extends HttpServlet {
 
-    private static final String CATALOG_XHTML = "/views/jsf/catalog.xhtml";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.getRequestDispatcher(CATALOG_XHTML).forward(req, resp);
+        req.getRequestDispatcher("/views/jsf/catalog.xhtml").forward(req, resp);
     }
 }

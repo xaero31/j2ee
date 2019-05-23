@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Admin Orders Panel</title>
+</h:head>
+
+<h:body>
+    <h2>Admin Orders Panel</h2>
+
+    <ui:include src="template/menu.xhtml"/>
+
+    <h:form id="orderForm">
+        <h:dataTable value="#{orderRepository.entries}" var="entry">
+            <h:column>
+                <f:facet name="header">User</f:facet>
+                #{entry.key}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Order</f:facet>
+                <h:dataTable value="#{entry.value}" var="order">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        #{order.id}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Date</f:facet>
+                        #{order.date.toString()}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">State</f:facet>
+                        #{order.state.name}
+                    </h:column>
+
+                    <h:column>
+                        <h:selectOneMenu value="#{order.state}">
+                            <f:selectItems value="#{state.states}" var="orderState"
+                                           itemValue="#{orderState}" itemLabel="#{orderState.name}"/>
+                        </h:selectOneMenu>
+
+                        <h:commandButton value="save changes"
+                                         action="#{orderRepository.updateOrder(entry.key, order)}"/>
+
+                        <h:commandButton value="remove"
+                                         action="#{orderRepository.removeByUserAndId(entry.key, order.id)}">
+                            <f:ajax render="orderForm"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

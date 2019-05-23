@@ -24,21 +24,23 @@
     <c:forEach items="${orders}" var="order">
         <tr>
             <td rowspan="${order.products.size() + 1}">${order.id}</td>
-            <td rowspan="${order.products.size() + 1}">${order.state.text}</td>
+            <td rowspan="${order.products.size() + 1}">${order.state.name}</td>
         </tr>
         <c:forEach items="${order.products}" var="product">
             <tr>
                 <td>${product.name}</td>
             </tr>
         </c:forEach>
-        <tr>
-            <td>
-                <form method="post" action="${pageContext.request.contextPath}/order/cancel">
-                    <input type="hidden" name="orderId" value="${order.id}"/>
-                    <input type="submit" value="cancel order"/>
-                </form>
-            </td>
-        </tr>
+        <c:if test="${order.state.toString() == 'IN_PROGRESS'}">
+            <tr>
+                <td>
+                    <form method="post" action="${pageContext.request.contextPath}/order/cancel">
+                        <input type="hidden" name="orderId" value="${order.id}"/>
+                        <input type="submit" value="cancel order"/>
+                    </form>
+                </td>
+            </tr>
+        </c:if>
     </c:forEach>
     </tbody>
 </table>
