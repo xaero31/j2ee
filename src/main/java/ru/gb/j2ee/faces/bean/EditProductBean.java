@@ -35,11 +35,7 @@ public class EditProductBean {
     }
 
     public String saveProduct() {
-        final Product oldProduct = productRepository.getById(product.getId());
-
-        productRepository.getProducts().remove(oldProduct);
-        productRepository.getProducts().add(product);
-
+        productRepository.merge(this.product);
         return CATALOG_XHTML;
     }
 }

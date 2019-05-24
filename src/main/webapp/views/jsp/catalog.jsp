@@ -21,6 +21,9 @@
     </thead>
 
     <tbody>
+    <c:if test="${category != null}">
+        <h3>${category}</h3>
+    </c:if>
     <c:forEach items="${products}" var="product">
         <tr>
             <td>${product.name}</td>
@@ -29,6 +32,7 @@
             <td>
                 <form method="post" action="${pageContext.request.contextPath}/catalog/buy">
                     <input type="hidden" name="productId" value="${product.id}"/>
+                    <input type="hidden" name="category" value="${category}"/>
                     <input type="submit" value="Buy"/>
                 </form>
             </td>

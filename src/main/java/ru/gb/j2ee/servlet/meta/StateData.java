@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
  *
  * Class for resolving SelectOneItem menu for order state in order.xhtml
  */
-@ManagedBean(name = "state")
+@ManagedBean(name = "stateData")
 @ViewScoped
 public class StateData {
 

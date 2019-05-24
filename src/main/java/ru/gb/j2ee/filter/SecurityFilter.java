@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  * Filter for secured servlets which requires to be logged in
  */
-@WebFilter(filterName = "security", urlPatterns = {"/security/*", "/cart/*", "/catalog/*", "/order/*"})
+@WebFilter(filterName = "security", urlPatterns = {"/security/*", "/cart/*", "/catalog/*", "/order/*", "/categories/*"})
 public class SecurityFilter implements Filter {
 
     private static final String USER = "user";

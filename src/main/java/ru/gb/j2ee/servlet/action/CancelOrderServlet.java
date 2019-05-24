@@ -1,6 +1,7 @@
 package ru.gb.j2ee.servlet.action;
 
 import lombok.Setter;
+import ru.gb.j2ee.model.Order;
 import ru.gb.j2ee.model.meta.State;
 import ru.gb.j2ee.repository.OrderRepository;
 
@@ -25,10 +26,11 @@ public class CancelOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        final String user = (String) req.getSession(false).getAttribute("user");
         final int orderId = Integer.valueOf(req.getParameter("orderId"));
+        final Order order = orderRepository.getById(orderId);
 
-        orderRepository.getByUserAndId(user, orderId).setState(State.CANCELED);
+        order.setState(State.CANCELED);
+        orderRepository.add(order);
         resp.sendRedirect(req.getContextPath() + "/order");
     }
 }

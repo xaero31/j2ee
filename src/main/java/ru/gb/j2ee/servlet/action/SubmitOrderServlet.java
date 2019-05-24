@@ -37,7 +37,8 @@ public class SubmitOrderServlet extends HttpServlet {
         if (order != null) {
             order.setDate(new Date());
             order.setState(State.IN_PROGRESS);
-            orderRepository.addOrder(user, order);
+            order.setUser(user);
+            orderRepository.add(order);
             session.removeAttribute(ORDER);
         }
 

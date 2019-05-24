@@ -33,7 +33,7 @@
 
             <h:column>
                 <h:commandButton value="edit" action="#{editBean.editProduct(product.id)}"/>
-                <h:commandButton value="remove" action="#{productRepository.products.remove(product)}">
+                <h:commandButton value="remove" action="#{productRepository.remove(product)}">
                     <f:ajax render="productsForm"/>
                 </h:commandButton>
             </h:column>

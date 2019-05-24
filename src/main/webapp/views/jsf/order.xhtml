@@ -15,15 +15,15 @@
     <ui:include src="template/menu.xhtml"/>
 
     <h:form id="orderForm">
-        <h:dataTable value="#{orderRepository.entries}" var="entry">
+        <h:dataTable value="#{orderRepository.users}" var="user">
             <h:column>
                 <f:facet name="header">User</f:facet>
-                #{entry.key}
+                #{user}
             </h:column>
 
             <h:column>
                 <f:facet name="header">Order</f:facet>
-                <h:dataTable value="#{entry.value}" var="order">
+                <h:dataTable value="#{orderRepository.getByUser(user)}" var="order">
                     <h:column>
                         <f:facet name="header">Id</f:facet>
                         #{order.id}
@@ -41,15 +41,13 @@
 
                     <h:column>
                         <h:selectOneMenu value="#{order.state}">
-                            <f:selectItems value="#{state.states}" var="orderState"
-                                           itemValue="#{orderState}" itemLabel="#{orderState.name}"/>
+                            <f:selectItems value="#{stateData.states}" var="state"
+                                           itemValue="#{state}" itemLabel="#{state.name}"/>
+                            <f:ajax event="change" listener="#{orderRepository.add(order)}"/>
                         </h:selectOneMenu>
 
-                        <h:commandButton value="save changes"
-                                         action="#{orderRepository.updateOrder(entry.key, order)}"/>
-
                         <h:commandButton value="remove"
-                                         action="#{orderRepository.removeByUserAndId(entry.key, order.id)}">
+                                         action="#{orderRepository.removeById(order.id)}">
                             <f:ajax render="orderForm"/>
                         </h:commandButton>
                     </h:column>

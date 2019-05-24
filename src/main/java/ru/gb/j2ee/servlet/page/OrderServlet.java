@@ -32,7 +32,7 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final HttpSession session = req.getSession(false);
         final String user = (String) session.getAttribute("user");
-        final List<Order> orders = orderRepository.getUserOrders(user);
+        final List<Order> orders = orderRepository.getByUser(user);
 
         req.setAttribute("orders", orders);
         req.getRequestDispatcher(ORDER_JSP).forward(req, resp);

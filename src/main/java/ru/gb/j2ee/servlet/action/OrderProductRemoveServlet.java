@@ -24,10 +24,17 @@ public class OrderProductRemoveServlet extends HttpServlet {
         final Order order = (Order) session.getAttribute("order");
         final int id = Integer.valueOf(req.getParameter("productId"));
 
-        order.getProducts().remove(order.getProducts().stream()
-                .filter(product -> product.getId() == id)
+        final Product product = order.getProductMap().keySet().stream()
+                .filter(key -> key.getId() == id)
                 .findFirst()
-                .orElse(new Product()));
+                .orElse(new Product());
+        int currentCount = order.getProductMap().get(product);
+
+        if (currentCount == 1) {
+            order.getProductMap().remove(product);
+        } else {
+            order.getProductMap().put(product, --currentCount);
+        }
 
         resp.sendRedirect(req.getContextPath() + "/cart");
     }

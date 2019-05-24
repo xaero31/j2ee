@@ -14,19 +14,21 @@
         <th>Name</th>
         <th>Price</th>
         <th>Description</th>
+        <th>Count</th>
     </tr>
     </thead>
 
     <tbody>
-    <c:forEach items="${list}" var="product">
+    <c:forEach items="${list.entrySet()}" var="entry">
         <tr>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.description}</td>
-            <c:if test="${product != null}">
+            <td>${entry.key.name}</td>
+            <td>${entry.key.price}</td>
+            <td>${entry.key.description}</td>
+            <td>${entry.value}</td>
+            <c:if test="${entry != null}">
                 <td>
                     <form method="post" action="${pageContext.request.contextPath}/cart/remove">
-                        <input type="hidden" name="productId" value="${product.id}"/>
+                        <input type="hidden" name="productId" value="${entry.key.id}"/>
                         <input type="submit" value="Remove"/>
                     </form>
                 </td>

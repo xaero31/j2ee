@@ -28,7 +28,7 @@ public class CartServlet extends HttpServlet {
         final Order order = (Order) session.getAttribute(ORDER);
 
         if (order != null) {
-            req.setAttribute("list", order.getProducts());
+            req.setAttribute("list", order.getProductMap());
             session.setAttribute(ORDER, order);
         }
 

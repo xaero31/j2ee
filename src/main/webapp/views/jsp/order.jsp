@@ -16,19 +16,30 @@
     <tr>
         <td>Id</td>
         <td>Status</td>
-        <td>Products</td>
+        <td>Product</td>
+        <td>Count</td>
     </tr>
     </thead>
 
     <tbody>
     <c:forEach items="${orders}" var="order">
+<%--        <tr>--%>
+<%--            <td rowspan="${order.products.size() + 1}">${order.id}</td>--%>
+<%--            <td rowspan="${order.products.size() + 1}">${order.state.name}</td>--%>
+<%--        </tr>--%>
+<%--        <c:forEach items="${order.products}" var="product">--%>
+<%--            <tr>--%>
+<%--                <td>${product.name}</td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
         <tr>
-            <td rowspan="${order.products.size() + 1}">${order.id}</td>
-            <td rowspan="${order.products.size() + 1}">${order.state.name}</td>
+            <td rowspan="${order.productMap.entrySet().size() + 1}">${order.id}</td>
+            <td rowspan="${order.productMap.entrySet().size() + 1}">${order.state.name}</td>
         </tr>
-        <c:forEach items="${order.products}" var="product">
+        <c:forEach items="${order.productMap.entrySet()}" var="entry">
             <tr>
-                <td>${product.name}</td>
+                <td>${entry.key.name}</td>
+                <td>${entry.value}</td>
             </tr>
         </c:forEach>
         <c:if test="${order.state.toString() == 'IN_PROGRESS'}">
