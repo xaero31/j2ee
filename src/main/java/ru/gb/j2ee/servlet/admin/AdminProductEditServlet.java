@@ -9,6 +9,8 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
+ *
+ * Servlet for admin edit product view
  */
 @WebServlet(name = "editProductAdmin", urlPatterns = "admin/edit")
 public class AdminProductEditServlet extends HttpServlet {

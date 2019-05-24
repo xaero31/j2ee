@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * @author Nikita Ermakov
- * <p>
+ *
  * Servlet for login form
  */
 @WebServlet(name = "login", urlPatterns = "/login_process")

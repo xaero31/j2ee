@@ -22,12 +22,13 @@ public class OrderProductRemoveServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         final HttpSession session = req.getSession(false);
         final Order order = (Order) session.getAttribute("order");
-        final int id = Integer.valueOf(req.getParameter("productId"));
+        final Product product = getProduct(order, req);
 
-        final Product product = order.getProductMap().keySet().stream()
-                .filter(key -> key.getId() == id)
-                .findFirst()
-                .orElse(new Product());
+        removeProduct(order, product);
+        resp.sendRedirect(req.getContextPath() + "/cart");
+    }
+
+    private void removeProduct(Order order, Product product) {
         int currentCount = order.getProductMap().get(product);
 
         if (currentCount == 1) {
@@ -35,7 +36,13 @@ public class OrderProductRemoveServlet extends HttpServlet {
         } else {
             order.getProductMap().put(product, --currentCount);
         }
+    }
 
-        resp.sendRedirect(req.getContextPath() + "/cart");
+    private Product getProduct(Order order, HttpServletRequest req) {
+        final int id = Integer.valueOf(req.getParameter("productId"));
+        return order.getProductMap().keySet().stream()
+                    .filter(key -> key.getId() == id)
+                    .findFirst()
+                    .orElse(new Product());
     }
 }

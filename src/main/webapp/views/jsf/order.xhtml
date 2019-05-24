@@ -15,7 +15,7 @@
     <ui:include src="template/menu.xhtml"/>
 
     <h:form id="orderForm">
-        <h:dataTable value="#{orderRepository.users}" var="user">
+        <h:dataTable value="#{adminOrderViewBean.users}" var="user">
             <h:column>
                 <f:facet name="header">User</f:facet>
                 #{user}
@@ -23,7 +23,7 @@
 
             <h:column>
                 <f:facet name="header">Order</f:facet>
-                <h:dataTable value="#{orderRepository.getByUser(user)}" var="order">
+                <h:dataTable value="#{adminOrderViewBean.getByUser(user)}" var="order">
                     <h:column>
                         <f:facet name="header">Id</f:facet>
                         #{order.id}
@@ -43,11 +43,11 @@
                         <h:selectOneMenu value="#{order.state}">
                             <f:selectItems value="#{stateData.states}" var="state"
                                            itemValue="#{state}" itemLabel="#{state.name}"/>
-                            <f:ajax event="change" listener="#{orderRepository.add(order)}"/>
+                            <f:ajax event="change" listener="#{orderRepository.add(order)}" render="orderForm"/>
                         </h:selectOneMenu>
 
                         <h:commandButton value="remove"
-                                         action="#{orderRepository.removeById(order.id)}">
+                                         action="#{adminOrderViewBean.remove(order)}">
                             <f:ajax render="orderForm"/>
                         </h:commandButton>
                     </h:column>

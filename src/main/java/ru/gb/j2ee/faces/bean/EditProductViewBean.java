@@ -16,7 +16,7 @@ import javax.inject.Inject;
  */
 @ManagedBean(name = "editBean")
 @SessionScoped
-public class EditProductBean {
+public class EditProductViewBean {
 
     private static final String EDIT_XHTML = "/views/jsf/edit";
 

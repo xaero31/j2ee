@@ -14,8 +14,6 @@ import java.util.List;
 
 /**
  * @author Nikita Ermakov
- *
- * Data-holder for all orders
  */
 @Named("orderRepository")
 @ApplicationScoped
@@ -58,18 +56,6 @@ public class OrderRepository {
         em.close();
         emf.close();
     }
-
-//    @SuppressWarnings("unchecked")
-//    public List<Order> getOrders() {
-//        final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
-//        final EntityManager em = emf.createEntityManager();
-//        final List<Order> orders = em.createQuery("SELECT o FROM Order o").getResultList();
-//
-//        em.close();
-//        emf.close();
-//
-//        return orders;
-//    }
 
     @SuppressWarnings("unchecked")
     public List<Order> getByUser(String user) {

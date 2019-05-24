@@ -32,10 +32,13 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        initData();
+        req.getRequestDispatcher(MAIN_JSP).forward(req, resp);
+    }
+
+    private void initData() {
         if (!productRepository.isReady() || !categoryRepository.isReady()) {
             System.out.println("Data initialized");
         }
-
-        req.getRequestDispatcher(MAIN_JSP).forward(req, resp);
     }
 }

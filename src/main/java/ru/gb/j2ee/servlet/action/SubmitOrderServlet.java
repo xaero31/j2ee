@@ -34,6 +34,11 @@ public class SubmitOrderServlet extends HttpServlet {
         final Order order = (Order) session.getAttribute(ORDER);
         final String user = (String) session.getAttribute("user");
 
+        addOrder(session, order, user);
+        resp.sendRedirect(req.getContextPath() + "/cart");
+    }
+
+    private void addOrder(HttpSession session, Order order, String user) {
         if (order != null) {
             order.setDate(new Date());
             order.setState(State.IN_PROGRESS);
@@ -41,7 +46,5 @@ public class SubmitOrderServlet extends HttpServlet {
             orderRepository.add(order);
             session.removeAttribute(ORDER);
         }
-
-        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

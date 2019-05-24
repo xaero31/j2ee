@@ -29,12 +29,6 @@ public class Order {
     @CollectionTable(name = "product_count")
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "count")
-//    @JoinTable(
-//            name = "orderProducts",
-//            joinColumns = @JoinColumn(name = "order_id")
-//    )
-//    @MapKey(name = "product_id")
-//    @Column(name = "count")
     private Map<Product, Integer> productMap;
 
     public Order() {

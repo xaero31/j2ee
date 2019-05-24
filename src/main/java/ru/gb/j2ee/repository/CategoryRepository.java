@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * @author Nikita Ermakov
- *
- * Data holder for categories
  */
 @Named("categoryRepository")
 @ApplicationScoped
