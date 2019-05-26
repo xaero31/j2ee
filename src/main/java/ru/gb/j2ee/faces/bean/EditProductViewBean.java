@@ -5,22 +5,19 @@ import lombok.Setter;
 import ru.gb.j2ee.model.Product;
 import ru.gb.j2ee.repository.ProductRepository;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
 
 /**
  * @author Nikita Ermakov
  *
  * Bean for inserting product to admin edit product jsf page
  */
-@ManagedBean(name = "editBean")
+@Named("editBean")
 @SessionScoped
-public class EditProductViewBean {
-
-    private static final String EDIT_XHTML = "/views/jsf/edit";
-
-    private static final String CATALOG_XHTML = "/views/jsf/catalog?faces-redirect=true";
+public class EditProductViewBean implements Serializable {
 
     @Getter
     private Product product;
@@ -31,11 +28,11 @@ public class EditProductViewBean {
 
     public String editProduct(int id) {
         this.product = productRepository.getById(id);
-        return EDIT_XHTML;
+        return "/views/jsf/edit";
     }
 
     public String saveProduct() {
         productRepository.merge(this.product);
-        return CATALOG_XHTML;
+        return "/views/jsf/catalog?faces-redirect=true";
     }
 }

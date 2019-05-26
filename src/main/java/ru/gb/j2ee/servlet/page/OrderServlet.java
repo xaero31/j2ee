@@ -22,8 +22,6 @@ import java.util.List;
 @WebServlet(name = "order", urlPatterns = "/order")
 public class OrderServlet extends HttpServlet {
 
-    private static final String ORDER_JSP = "/views/jsp/order.jsp";
-
     @Setter
     @Inject
     private OrderRepository orderRepository;
@@ -35,6 +33,6 @@ public class OrderServlet extends HttpServlet {
         final List<Order> orders = orderRepository.getByUser(user);
 
         req.setAttribute("orders", orders);
-        req.getRequestDispatcher(ORDER_JSP).forward(req, resp);
+        req.getRequestDispatcher("/views/jsp/order.jsp").forward(req, resp);
     }
 }

@@ -19,17 +19,13 @@ import java.io.IOException;
 @WebServlet(name = "catalog", urlPatterns = "/catalog")
 public class CatalogServlet extends HttpServlet {
 
-    private static final String PRODUCTS_ATTRIBUTE = "products";
-
-    private static final String CATALOG_JSP = "/views/jsp/catalog.jsp";
-
     @Setter
     @Inject
     private ProductRepository productRepository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute(PRODUCTS_ATTRIBUTE, productRepository.getProducts());
-        req.getRequestDispatcher(CATALOG_JSP).forward(req, resp);
+        req.setAttribute("products", productRepository.getProducts());
+        req.getRequestDispatcher("/views/jsp/catalog.jsp").forward(req, resp);
     }
 }

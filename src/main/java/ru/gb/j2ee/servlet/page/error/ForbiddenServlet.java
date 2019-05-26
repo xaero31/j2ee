@@ -13,13 +13,9 @@ import java.io.IOException;
  */
 public class ForbiddenServlet extends HttpServlet {
 
-    private static final String MESSAGE = "Error 403. Forbidden. Redirecting to main page";
-
-    private static final String MAIN = "main";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(MESSAGE);
-        req.getRequestDispatcher(MAIN).forward(req, resp);
+        System.out.println("Error 403. Forbidden. Redirecting to main page");
+        req.getRequestDispatcher("main").forward(req, resp);
     }
 }

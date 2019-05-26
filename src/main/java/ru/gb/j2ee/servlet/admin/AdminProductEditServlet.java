@@ -15,10 +15,8 @@ import java.io.IOException;
 @WebServlet(name = "editProductAdmin", urlPatterns = "admin/edit")
 public class AdminProductEditServlet extends HttpServlet {
 
-    private static final String EDIT_XHTML = "/views/jsf/edit.xhtml";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(EDIT_XHTML).forward(req, resp);
+        req.getRequestDispatcher("/views/jsf/edit.xhtml").forward(req, resp);
     }
 }

@@ -18,8 +18,6 @@ import java.io.IOException;
 @WebServlet(name = "cart", urlPatterns = "/cart")
 public class CartServlet extends HttpServlet {
 
-    private static final String CART_JSP = "/views/jsp/cart.jsp";
-
     private static final String ORDER = "order";
 
     @Override
@@ -32,6 +30,6 @@ public class CartServlet extends HttpServlet {
             session.setAttribute(ORDER, order);
         }
 
-        req.getRequestDispatcher(CART_JSP).forward(req, resp);
+        req.getRequestDispatcher("/views/jsp/cart.jsp").forward(req, resp);
     }
 }

@@ -1,10 +1,5 @@
 package ru.gb.j2ee.servlet.page;
 
-import lombok.Setter;
-import ru.gb.j2ee.repository.CategoryRepository;
-import ru.gb.j2ee.repository.ProductRepository;
-
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,25 +15,8 @@ import java.io.IOException;
 @WebServlet(name = "main", urlPatterns = "/main")
 public class MainServlet extends HttpServlet {
 
-    private static final String MAIN_JSP = "/views/jsp/main.jsp";
-
-    @Setter
-    @Inject
-    private ProductRepository productRepository;
-
-    @Setter
-    @Inject
-    private CategoryRepository categoryRepository;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        initData();
-        req.getRequestDispatcher(MAIN_JSP).forward(req, resp);
-    }
-
-    private void initData() {
-        if (!productRepository.isReady() || !categoryRepository.isReady()) {
-            System.out.println("Data initialized");
-        }
+        req.getRequestDispatcher("/views/jsp/main.jsp").forward(req, resp);
     }
 }
