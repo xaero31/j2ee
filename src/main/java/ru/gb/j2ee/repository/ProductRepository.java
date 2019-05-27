@@ -1,6 +1,7 @@
 package ru.gb.j2ee.repository;
 
 import lombok.Setter;
+import ru.gb.j2ee.logging.MethodLogger;
 import ru.gb.j2ee.model.Product;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +9,8 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
@@ -25,36 +28,42 @@ public class ProductRepository implements Serializable {
 
     @Setter
     @PersistenceContext(unitName = "mysqlDB")
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Setter
     @Inject
     private CategoryRepository categoryRepository;
 
+    @Interceptors({MethodLogger.class})
     @PostConstruct
     public void initData() {
-        em.merge(new Product("Leg", 500, "Human's leg", categoryRepository.getByName("Legs")));
-        em.merge(new Product("Broken leg", 100,
+        entityManager.merge(new Product("Leg", 500,
+                "Human's leg", categoryRepository.getByName("Legs")));
+        entityManager.merge(new Product("Broken leg", 100,
                 "Broken human's leg in 2 places", categoryRepository.getByName("Legs")));
-        em.merge(new Product("Hand", 375, "Human's hand", categoryRepository.getByName("Hands")));
-        em.merge(new Product("Head", 2000,
+        entityManager.merge(new Product("Hand", 375,
+                "Human's hand", categoryRepository.getByName("Hands")));
+        entityManager.merge(new Product("Head", 2000,
                 "Separated human's head", categoryRepository.getByName("Heads")));
     }
 
     public void merge(Product product) {
-        em.merge(product);
+        entityManager.merge(product);
     }
 
+    @Interceptors({MethodLogger.class})
     public Product getById(int id) {
-        return em.find(Product.class, id);
+        return entityManager.find(Product.class, id);
     }
 
+    @Interceptors({MethodLogger.class})
     @SuppressWarnings("unchecked")
     public List<Product> getProducts() {
-        return em.createQuery("SELECT p FROM Product p").getResultList();
+        return entityManager.createQuery("SELECT p FROM Product p").getResultList();
     }
 
+    @Interceptors({MethodLogger.class})
     public void remove(Product product) {
-        em.remove(em.find(Product.class, product.getId()));
+        entityManager.remove(entityManager.find(Product.class, product.getId()));
     }
 }

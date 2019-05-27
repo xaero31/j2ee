@@ -5,7 +5,7 @@ import lombok.Setter;
 import ru.gb.j2ee.model.Product;
 import ru.gb.j2ee.repository.ProductRepository;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import java.io.Serializable;
  * Bean for inserting product to admin edit product jsf page
  */
 @Named("editBean")
-@SessionScoped
+@RequestScoped
 public class EditProductViewBean implements Serializable {
 
     @Getter
