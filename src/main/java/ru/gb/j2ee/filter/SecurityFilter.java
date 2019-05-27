@@ -41,15 +41,14 @@ public class SecurityFilter implements Filter {
 
         if (session == null || session.getAttribute(USER) == null) {
             request.setAttribute(FAILED_ATTRIBUTE, true);
-            request.getRequestDispatcher(request.getContextPath() + MAIN).forward(request, response);
+            response.sendRedirect(request.getContextPath() + MAIN);
         } else {
             final String user = (String) session.getAttribute(USER);
 
             response.setHeader(CACHE_TITLE, CACHE_PARAMS);
             response.getWriter().println(LOGOUT_PREFIX + user + LOGOUT_MID_PART
                     + request.getContextPath() + LOGOUT_POSTFIX);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 }
