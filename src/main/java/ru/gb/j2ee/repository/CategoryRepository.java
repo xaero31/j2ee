@@ -54,4 +54,9 @@ public class CategoryRepository {
                 .setParameter("name", name)
                 .getSingleResult();
     }
+
+    @Interceptors({MethodLogger.class})
+    public void merge(Category category) {
+        entityManager.merge(category);
+    }
 }

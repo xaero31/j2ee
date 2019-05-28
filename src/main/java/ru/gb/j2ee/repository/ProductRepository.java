@@ -66,4 +66,19 @@ public class ProductRepository implements Serializable {
     public void remove(Product product) {
         entityManager.remove(entityManager.find(Product.class, product.getId()));
     }
+
+    @Interceptors({MethodLogger.class})
+    public Product getByName(String name) {
+        return (Product) entityManager.createQuery("SELECT p FROM Product p WHERE p.name=:name")
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
+    @Interceptors({MethodLogger.class})
+    @SuppressWarnings("unchecked")
+    public List<Product> getByCategoryId(int id) {
+        return entityManager.createQuery("SELECT p FROM Product p WHERE p.category.id=:id")
+                .setParameter("id", id)
+                .getResultList();
+    }
 }
