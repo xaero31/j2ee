@@ -9,6 +9,8 @@ import ru.gb.j2ee.repository.ProductRepository;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import java.io.IOException;
  * Servlet for 'buy' button at catalog view
  */
 @WebServlet(name = "buyServlet", urlPatterns = "/catalog/buy")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"user", "admin"}))
 public class BuyProductServlet extends HttpServlet {
 
     private static final String ORDER = "order";

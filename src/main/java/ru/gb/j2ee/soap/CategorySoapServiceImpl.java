@@ -1,5 +1,6 @@
 package ru.gb.j2ee.soap;
 
+import org.jboss.annotation.security.SecurityDomain;
 import ru.gb.j2ee.model.Category;
 import ru.gb.j2ee.repository.CategoryRepository;
 

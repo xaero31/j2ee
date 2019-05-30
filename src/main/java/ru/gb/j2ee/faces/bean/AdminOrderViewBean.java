@@ -5,6 +5,7 @@ import ru.gb.j2ee.model.Order;
 import ru.gb.j2ee.repository.OrderRepository;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,6 +41,7 @@ public class AdminOrderViewBean {
         users.forEach(user -> orderMap.put(user, orderRepository.getByUser(user)));
     }
 
+    @RolesAllowed("admin")
     public void remove(Order order) {
         orderRepository.removeById(order.getId());
         loadData();

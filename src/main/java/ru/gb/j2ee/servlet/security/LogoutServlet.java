@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  * Servlet for logout action
  */
-@WebServlet(name = "logout", urlPatterns = "/security/logout")
+@WebServlet(name = "logout", urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
 
     @Override

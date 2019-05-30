@@ -6,6 +6,8 @@ import ru.gb.j2ee.repository.CategoryRepository;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import java.io.IOException;
  * Servlet for categories.jsp
  */
 @WebServlet(name = "categories", urlPatterns = "/categories")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"user", "admin"}))
 public class CategoriesServlet extends HttpServlet {
 
     @Setter

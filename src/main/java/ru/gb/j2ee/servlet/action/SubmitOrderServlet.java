@@ -6,6 +6,8 @@ import ru.gb.j2ee.model.meta.State;
 import ru.gb.j2ee.repository.OrderRepository;
 
 import javax.inject.Inject;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import java.util.Date;
  * Servlet for approving user's order
  */
 @WebServlet(name = "submitOrder", urlPatterns = "/cart/submit")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"user", "admin"}))
 public class SubmitOrderServlet extends HttpServlet {
 
     private static final String ORDER = "order";

@@ -3,6 +3,8 @@ package ru.gb.j2ee.servlet.action;
 import ru.gb.j2ee.model.Order;
 import ru.gb.j2ee.model.Product;
 
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import java.io.IOException;
  * Servlet for removing product from user's product cart
  */
 @WebServlet(name = "orderProductRemove", urlPatterns = "/cart/remove")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"user", "admin"}))
 public class OrderProductRemoveServlet extends HttpServlet {
 
     @Override

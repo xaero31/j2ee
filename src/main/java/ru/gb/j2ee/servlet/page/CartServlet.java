@@ -3,6 +3,8 @@ package ru.gb.j2ee.servlet.page;
 import ru.gb.j2ee.model.Order;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import java.io.IOException;
  * Servlet for cart.jsp page
  */
 @WebServlet(name = "cart", urlPatterns = "/cart")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"user", "admin"}))
 public class CartServlet extends HttpServlet {
 
     private static final String ORDER = "order";
